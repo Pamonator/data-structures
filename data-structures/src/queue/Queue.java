@@ -135,7 +135,7 @@ public class Queue {
 
                 }
                 
-                for (int i = 0; i < this.last; i++) {
+                for (int i = 0; i <= this.last; i++) {
                     
                     System.out.println(vector[i]);
                     

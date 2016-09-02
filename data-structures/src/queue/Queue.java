@@ -15,28 +15,50 @@ import exception.FullQueueException;
 public class Queue {
 
     public int[] vector;
+    public int first;
     public int last;
     public int n;
+    private int size;
 
     public Queue(int n) {
 
         this.vector = new int[n];
         this.n = n;
+        this.first = -1;
         this.last = -1;
+        this.size = 0;
 
     }
 
     public void enqueue(int value) throws FullQueueException {
 
-        if (!this.isFull()) {
+        if (this.isEmpty()) {
 
-            this.last++;
-            this.vector[last] = value;
+            this.first++;
+            this.last = this.first;
+            this.vector[this.first] = value;
+            this.size++;
+
+        } else if (!this.isFull()) {
+
+            if (this.last == (this.n - 1)) {
+
+                this.last = 0;
+                this.vector[last] = value;
+
+            } else {
+
+                this.last++;
+                this.vector[last] = value;
+
+            }
+
+            this.size++;
 
         } else {
-            
+
             throw new FullQueueException("A fila está cheia!");
-            
+
         }
 
     }
@@ -45,17 +67,23 @@ public class Queue {
 
         if (!this.isEmpty() && this.size() > 1) {
 
-            for (int i = 1; i <= this.last; i++) {
+            if (this.first == (this.n - 1)) {
 
-                vector[i - 1] = vector[i];
+                this.first = 0;
+
+            } else {
+
+                this.first++;
 
             }
 
-            last--;
+            this.size--;
 
         } else if (!this.isEmpty() && this.size() == 1) {
 
-            last--;
+            this.first = -1;
+            this.last = -1;
+            this.size = 0;
 
         } else {
 
@@ -67,19 +95,19 @@ public class Queue {
 
     public boolean isEmpty() {
 
-        return last < 0;
+        return this.last < 0 || this.first < 0;
 
     }
 
     public boolean isFull() {
 
-        return last == (n - 1);
+        return this.size == n;
 
     }
 
     public int size() {
 
-        return last + 1;
+        return this.size;
 
     }
 
@@ -87,16 +115,38 @@ public class Queue {
 
         if (!this.isEmpty()) {
 
-            for (int i = 0; i <= this.last; i++) {
+            if (this.first == this.last) {
 
-                System.out.println(vector[i]);
+                System.out.println(vector[this.first]);
+
+            } else if (this.first < this.last) {
+
+                for (int i = this.first; i <= this.last; i++) {
+
+                    System.out.println(vector[i]);
+
+                }
+
+            } else {
+
+                for (int i = this.first; i < (n - 1); i++) {
+
+                    System.out.println(vector[i]);
+
+                }
+                
+                for (int i = 0; i < this.last; i++) {
+                    
+                    System.out.println(vector[i]);
+                    
+                }
 
             }
 
         } else {
-            
+
             throw new EmptyQueueException("A fila está vazia!");
-            
+
         }
 
     }

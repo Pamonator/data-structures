@@ -93,6 +93,18 @@ public class Queue {
 
     }
 
+    public int head() {
+        
+        return vector[this.first];
+        
+    }
+    
+    public int tail() {
+        
+        return vector[this.last];
+        
+    }
+    
     public boolean isEmpty() {
 
         return this.last < 0 || this.first < 0;
@@ -115,11 +127,7 @@ public class Queue {
 
         if (!this.isEmpty()) {
 
-            if (this.first == this.last) {
-
-                System.out.println(vector[this.first]);
-
-            } else if (this.first <= this.last) {
+            if (this.first <= this.last) {
 
                 for (int i = this.first; i <= this.last; i++) {
 

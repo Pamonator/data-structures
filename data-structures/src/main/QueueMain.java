@@ -36,9 +36,7 @@ public class QueueMain {
             flag = scanner.nextInt();
 
             switch (flag) {
-                case 0:
-
-                    break;
+                
                 case 1:
 
                     queue = new Queue(n);
@@ -51,7 +49,9 @@ public class QueueMain {
                                 + "\n#3 - Exibir os valores da fila."
                                 + "\n#4 - Exibir status da fila."
                                 + "\n#5 - Tamanho da fila."
-                                + "\n#6 - Voltar ao menu anterior.");
+                                + "\n#6 - Exibir cabeça: "
+                                + "\n#7 - Exibir cauda: "
+                                + "\n#8 - Voltar ao menu anterior.");
                         flag = scanner.nextInt();
 
                         switch (flag) {
@@ -129,12 +129,25 @@ public class QueueMain {
                                 break;
 
                             case 6:
+                                
+                                System.out.println("Cabeça: " + queue.head());
 
                                 break;
+                            case 7:
+
+                                System.out.println("Cauda: " + queue.tail());
+                                
+                                break;
+                            case 8:
+
+                                break;
+                            default:
+                                
+                                break;                    
 
                         }
 
-                    } while (flag != 6);
+                    } while (flag != 8);
 
                     break;
 
@@ -150,7 +163,9 @@ public class QueueMain {
                                 + "\n#3 - Exibir os valores da fila."
                                 + "\n#4 - Exibir status da fila."
                                 + "\n#5 - Tamanho da fila."
-                                + "\n#6 - Voltar ao menu anterior.");
+                                + "\n#6 - Exibir cabeça: "
+                                + "\n#7 - Exibir cauda: "
+                                + "\n#8 - Voltar ao menu anterior.");
                         flag = scanner.nextInt();
 
                         switch (flag) {
@@ -220,12 +235,26 @@ public class QueueMain {
                                 break;
 
                             case 6:
+                                
+                                System.out.println("Cabeça: " + dynamicQueue.head());
 
                                 break;
+                            case 7:
+
+                                System.out.println("Cauda: " + dynamicQueue.tail());
+                                
+                                break;
+                            case 8:
+
+                                break;
+                            default:
+                                
+                                break;                    
+
 
                         }
 
-                    } while (flag != 6);
+                    } while (flag != 8);
 
                     break;
 

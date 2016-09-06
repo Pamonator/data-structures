@@ -53,6 +53,19 @@ public class DynamicQueue {
 
     }
 
+    public int head() {
+        
+        return this.first.getValue();
+        
+    }
+    
+    public int tail() {
+        
+        return this.last.getValue();
+        
+    }
+    
+    
     public boolean isEmpty() {
 
         return this.first == null;

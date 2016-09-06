@@ -119,7 +119,7 @@ public class Queue {
 
                 System.out.println(vector[this.first]);
 
-            } else if (this.first < this.last) {
+            } else if (this.first <= this.last) {
 
                 for (int i = this.first; i <= this.last; i++) {
 
@@ -127,9 +127,9 @@ public class Queue {
 
                 }
 
-            } else {
+            } else if (this.first > this.last) {
 
-                for (int i = this.first; i < (n - 1); i++) {
+                for (int i = this.first; i < n; i++) {
 
                     System.out.println(vector[i]);
 

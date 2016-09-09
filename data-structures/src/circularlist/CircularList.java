@@ -6,6 +6,7 @@
 package circularlist;
 
 import exception.EmptyListException;
+import node.Node;
 
 /**
  *

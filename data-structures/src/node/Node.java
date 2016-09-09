@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package circularlist;
-
-import linkedlist.*;
+package node;
 
 /**
  *
- * @author gilca
+ * @author a1402072
  */
 public class Node {
     

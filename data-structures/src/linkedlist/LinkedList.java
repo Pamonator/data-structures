@@ -5,7 +5,7 @@
  */
 package linkedlist;
 
-import circularlist.*;
+import node.Node;
 import exception.EmptyListException;
 
 /**
@@ -44,24 +44,32 @@ public class LinkedList {
 
     public void delist(int value) {
 
-        Node nodeAux = this.first;
+        if (doExist(value)) {
 
-        if (nodeAux.getValue() == value) {
+            Node nodeAux = this.first;
 
-            this.first = this.first.getNext();
+            if (nodeAux.getValue() == value) {
 
-        }
+                this.first = this.first.getNext();
 
-        while (nodeAux.getNext() != null) {
+            }
 
-            if (nodeAux.getNext().getValue() == value) {
+            while (nodeAux.getNext() != null) {
+
+                if (nodeAux.getNext().getValue() == value) {
+
+                    nodeAux = nodeAux.getNext().getNext();
+
+                }
 
                 nodeAux = nodeAux.getNext();
 
             }
 
-            nodeAux = nodeAux.getNext();
-
+        } else {
+            
+            System.out.println("Valor não encontrado na lista!");
+            
         }
 
     }
@@ -131,7 +139,7 @@ public class LinkedList {
 
         } else {
 
-            throw new EmptyListException("A fila está vazia!");
+            throw new EmptyListException("A lista está vazia!");
 
         }
 

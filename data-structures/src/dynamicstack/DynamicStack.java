@@ -59,7 +59,7 @@ public class DynamicStack {
 
             }
 
-        } 
+        }
 
         return size;
 

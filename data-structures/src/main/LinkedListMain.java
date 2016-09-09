@@ -19,7 +19,7 @@ public class LinkedListMain {
         Scanner scanner = new Scanner(System.in);
         LinkedList linkedList = new LinkedList();
         int value;
-        int flag = 0;
+        int flag;
 
         System.out.println("### Welcome to the Linked List Tabajara Test ###");
 
@@ -38,25 +38,20 @@ public class LinkedListMain {
                 case 1:
                     System.out.println("Digite o valor a enfileirar: ");
                     value = scanner.nextInt();
-                    //dynamicstack.stackUp(value);
+                    linkedList.enlist(value);
                     break;
                 case 2:
-                    try {
 
-                        //dynamicstack.unstack();
-                        System.out.println("Done!");
+                    System.out.println("Digite o valor de deseja remover da lista:");
+                    value = scanner.nextInt();
+                    linkedList.delist(value);
 
-                    } catch (Exception e) {
-
-                        System.out.println(e.getMessage());
-
-                    }
                     break;
                 case 3:
                     try {
 
                         System.out.println("\nValores contidos na lista: ");
-                        //dynamicstack.showValues();
+                        linkedList.showValues();
 
                     } catch (Exception e) {
 

@@ -6,6 +6,7 @@
 package dynamicqueue;
 
 import exception.EmptyQueueException;
+import node.Node;
 
 /**
  *

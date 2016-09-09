@@ -3,41 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package linkedlist;
+package circularlist;
 
-import circularlist.*;
 import exception.EmptyListException;
 
 /**
  *
  * @author gilca
  */
-public class LinkedList {
+public class CircularList {
 
     private Node first = null;
+    private Node last = null;
 
     public void enlist(int value) {
 
         Node newNode;
-        newNode = new Node();
-        newNode.setValue(value);
-        newNode.setNext(null);
 
         if (this.isEmpty()) {
 
+            newNode = new Node();
+            newNode.setValue(value);
+            newNode.setNext(null);
             this.first = newNode;
+            this.last = newNode;
+            this.last.setNext(this.first);
 
         } else {
 
-            Node aux = this.first;
+            newNode = new Node();
+            newNode.setValue(value);
+            newNode.setNext(null);
+            this.last.setNext(newNode);
+            this.last = newNode;
 
-            while (aux.getNext() != null) {
-
-                aux = aux.getNext();
-
-            }
-
-            aux.setNext(newNode);
         }
 
     }
@@ -64,25 +63,6 @@ public class LinkedList {
 
         }
 
-    }
-
-    public Node getFirst() {
-
-        return this.first;
-
-    }
-
-    public Node getLast() {
-
-        Node aux = this.first;
-
-        while (aux.getNext() != null) {
-
-            aux = aux.getNext();
-
-        }
-
-        return aux;
     }
 
     public boolean isEmpty() {

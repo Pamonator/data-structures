@@ -1,49 +1,49 @@
-/*          
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package main;
 
-import dynamicstack.DynamicStack;
 import java.util.Scanner;
+import linkedlist.LinkedList;
 
 /**
  *
- * @author gilca
+ * @author a1402072
  */
-public class MainDynamicStack {
+public class LinkedListMain {
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        DynamicStack dynamicstack = new DynamicStack();
+        LinkedList linkedList = new LinkedList();
         int value;
-        int flag;
+        int flag = 0;
 
-        System.out.println("### Welcome to the Dynamic Stack Tabajara Test ###");
+        System.out.println("### Welcome to the Linked List Tabajara Test ###");
 
         do {
 
             System.out.println("\n# Escolha sua opçao:"
-                    + "\n#1 - Empilhar um valor inteiro."
-                    + "\n#2 - Desempilhar."
-                    + "\n#3 - Exibir os valores da pilha."
-                    + "\n#4 - Exibir status da pilha."
-                    + "\n#5 - Tamanho da pilha."
+                    + "\n#1 - Enfileirar um valor inteiro."
+                    + "\n#2 - Desinfileirar."
+                    + "\n#3 - Exibir os valores da lista."
+                    + "\n#4 - Exibir status da lista."
+                    + "\n#5 - Tamanho da lista."
                     + "\n#6 - Sair.");
             flag = scanner.nextInt();
 
             switch (flag) {
                 case 1:
-                    System.out.println("Digite o valor a empilhar: ");
+                    System.out.println("Digite o valor a enfileirar: ");
                     value = scanner.nextInt();
-                    dynamicstack.stackUp(value);
+                    //dynamicstack.stackUp(value);
                     break;
                 case 2:
                     try {
 
-                        dynamicstack.unstack();
+                        //dynamicstack.unstack();
                         System.out.println("Done!");
 
                     } catch (Exception e) {
@@ -55,8 +55,8 @@ public class MainDynamicStack {
                 case 3:
                     try {
 
-                        System.out.println("\nValores contidos na pilha: ");
-                        dynamicstack.showValues();
+                        System.out.println("\nValores contidos na lista: ");
+                        //dynamicstack.showValues();
 
                     } catch (Exception e) {
 
@@ -64,21 +64,21 @@ public class MainDynamicStack {
                     }
                     break;
                 case 4:
-                    if (dynamicstack.isEmpty()) {
+                    if (linkedList.isEmpty()) {
 
-                        System.out.println("Pilha vazia");
+                        System.out.println("Lista vazia");
 
                     } else {
 
-                        System.out.println("Pilha não vazia");
+                        System.out.println("Lista não vazia");
 
                     }
                     break;
                 case 5:
                     try {
 
-                        System.out.println("\nTamanho da pilha = "
-                                + dynamicstack.size() + "\n");
+                        System.out.println("\nTamanho da lista = "
+                                + linkedList.size() + "\n");
 
                     } catch (Exception e) {
 
@@ -92,7 +92,7 @@ public class MainDynamicStack {
             }
 
         } while (flag != 6);
-        
+
     }
 
 }

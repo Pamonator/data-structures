@@ -42,33 +42,41 @@ public class LinkedList {
 
     }
 
-    public void delist(int value) {
+    public void delist(int value) throws EmptyListException {
 
-        if (doExist(value)) {
+        if (!this.isEmpty()) {
 
-            Node nodeAux = this.first;
+            if (this.doExist(value)) {
 
-            if (nodeAux.getValue() == value) {
+                Node nodeAux = this.first;
 
-                this.first = this.first.getNext();
+                if (nodeAux.getValue() == value) {
 
-            }
-
-            while (nodeAux.getNext() != null) {
-
-                if (nodeAux.getNext().getValue() == value) {
-
-                    nodeAux = nodeAux.getNext().getNext();
+                    this.first = this.first.getNext();
 
                 }
 
-                nodeAux = nodeAux.getNext();
+                while (nodeAux.getNext() != null) {
+
+                    if (nodeAux.getNext().getValue() == value) {
+
+                        nodeAux = nodeAux.getNext().getNext();
+
+                    }
+
+                    nodeAux = nodeAux.getNext();
+
+                }
+
+            } else {
+
+                System.out.println("Valor não encontrado na lista!");
 
             }
-
+            
         } else {
             
-            System.out.println("Valor não encontrado na lista!");
+            throw new EmptyListException("A lista está vazia!");
             
         }
 

@@ -36,17 +36,29 @@ public class LinkedListMain {
 
             switch (flag) {
                 case 1:
+
                     System.out.println("Digite o valor a enfileirar: ");
                     value = scanner.nextInt();
                     linkedList.enlist(value);
                     break;
+
                 case 2:
 
                     System.out.println("Digite o valor de deseja remover da lista:");
                     value = scanner.nextInt();
-                    linkedList.delist(value);
+
+                    try {
+
+                        linkedList.delist(value);
+
+                    } catch (Exception e) {
+
+                        System.out.println(e.getMessage());
+
+                    }
 
                     break;
+                    
                 case 3:
                     try {
 
@@ -58,6 +70,7 @@ public class LinkedListMain {
                         System.out.println(e.getMessage());
                     }
                     break;
+                    
                 case 4:
                     if (linkedList.isEmpty()) {
 
@@ -69,6 +82,7 @@ public class LinkedListMain {
 
                     }
                     break;
+                    
                 case 5:
                     try {
 
@@ -81,9 +95,11 @@ public class LinkedListMain {
 
                     }
                     break;
+                    
                 case 6:
                     System.out.println("### CHEERS!! ###");
                     break;
+                    
             }
 
         } while (flag != 6);

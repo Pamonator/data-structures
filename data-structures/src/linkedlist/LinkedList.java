@@ -29,15 +29,15 @@ public class LinkedList {
 
         } else {
 
-            Node aux = this.first;
+            Node auxNode = this.first;
 
-            while (aux.getNext() != null) {
+            while (auxNode.getNext() != null) {
 
-                aux = aux.getNext();
+                auxNode = auxNode.getNext();
 
             }
 
-            aux.setNext(newNode);
+            auxNode.setNext(newNode);
         }
 
     }
@@ -46,38 +46,38 @@ public class LinkedList {
 
         if (!this.isEmpty()) {
 
-            if (this.doExist(value)) {
+            while (this.doesValueExist(value)) {
 
-                Node nodeAux = this.first;
-
-                if (nodeAux.getValue() == value) {
+                if (this.first.getValue() == value) {
 
                     this.first = this.first.getNext();
 
-                }
+                } else {
 
-                while (nodeAux.getNext() != null) {
+                    Node auxNode = this.first;
 
-                    if (nodeAux.getNext().getValue() == value) {
+                    while (auxNode.getNext() != null) {
 
-                        nodeAux = nodeAux.getNext().getNext();
+                        if (auxNode.getNext().getValue() == value) {
+
+                            auxNode.setNext(auxNode.getNext().getNext());
+
+                        } else {
+
+                            auxNode = auxNode.getNext();
+
+                        }
 
                     }
 
-                    nodeAux = nodeAux.getNext();
-
                 }
 
-            } else {
-
-                System.out.println("Valor não encontrado na lista!");
-
             }
-            
+
         } else {
-            
+
             throw new EmptyListException("A lista está vazia!");
-            
+
         }
 
     }
@@ -101,6 +101,114 @@ public class LinkedList {
         return aux;
     }
 
+    public boolean removeValue(int value) throws EmptyListException {
+
+        boolean wasRemoved = false;
+
+        if (!this.isEmpty()) {
+
+            if (this.first.getValue() == value) {
+
+                this.first = this.first.getNext();
+
+                wasRemoved = true;
+
+            } else {
+
+                Node auxNode = this.first;
+
+                while (auxNode.getNext() != null) {
+
+                    if (auxNode.getNext().getValue() == value) {
+
+                        auxNode.setNext(auxNode.getNext().getNext());
+
+                        wasRemoved = true;
+
+                    } else {
+
+                        auxNode = auxNode.getNext();
+
+                    }
+
+                }
+
+            }
+
+        } else {
+
+            throw new EmptyListException("A Lista esta vazia!");
+
+        }
+
+        return wasRemoved;
+
+    }
+
+    public boolean removeFirst() throws EmptyListException {
+
+        boolean wasRemoved = false;
+
+        if (!this.isEmpty()) {
+
+            this.first = this.first.getNext();
+
+            wasRemoved = true;
+
+        } else {
+
+            throw new EmptyListException("A Lista esta vazia!");
+
+        }
+
+        return wasRemoved;
+
+    }
+
+    public boolean removeLast() {
+
+        boolean wasRemoved = false;
+
+        if (!this.isEmpty()) {
+
+            if (this.first.getNext() == null) {
+
+                this.first = null;
+
+                wasRemoved = true;
+
+            } else {
+
+                Node auxNode = this.first;
+
+                while (auxNode.getNext() != null) {
+
+                    if (auxNode.getNext().getNext() == null) {
+
+                        auxNode.setNext(null);
+
+                        wasRemoved = true;
+
+                    } else {
+
+                        auxNode = auxNode.getNext();
+
+                    }
+
+                }
+
+            }
+
+        } else {
+
+            throw new EmptyListException("A Lista esta vazia!");
+
+        }
+
+        return wasRemoved;
+
+    }
+
     public boolean isEmpty() {
 
         return this.first == null;
@@ -111,7 +219,7 @@ public class LinkedList {
 
         int size = 0;
 
-        if (!isEmpty()) {
+        if (!this.isEmpty()) {
 
             size = 1;
 
@@ -153,25 +261,29 @@ public class LinkedList {
 
     }
 
-    public boolean doExist(int value) {
+    public boolean doesValueExist(int value) {        
 
-        Node nodeAux = this.first;
+        if (!this.isEmpty()) {
 
-        if (nodeAux.getValue() == value) {
+            Node nodeAux = this.first;
 
-            return true;
-
-        }
-
-        while (nodeAux.getNext() != null) {
-
-            if (nodeAux.getNext().getValue() == value) {
+            if (nodeAux.getValue() == value) {
 
                 return true;
 
             }
 
-            nodeAux = nodeAux.getNext();
+            while (nodeAux.getNext() != null) {
+
+                if (nodeAux.getNext().getValue() == value) {
+
+                    return true;
+
+                }
+
+                nodeAux = nodeAux.getNext();
+
+            }
 
         }
 

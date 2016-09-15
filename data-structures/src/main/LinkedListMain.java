@@ -21,29 +21,49 @@ public class LinkedListMain {
         int value;
         int flag;
 
-        System.out.println("### Welcome to the Linked List Tabajara Test ###");
+        System.out.println("### Welcome to the Linked List Tabajara Tester ###");
 
         do {
 
             System.out.println("\n# Escolha sua opçao:"
-                    + "\n#1 - Enfileirar um valor inteiro."
-                    + "\n#2 - Desinfileirar."
-                    + "\n#3 - Exibir os valores da lista."
-                    + "\n#4 - Exibir status da lista."
-                    + "\n#5 - Tamanho da lista."
-                    + "\n#6 - Sair.");
+                    + "\n#1 - Adicionar um valor inteiro na lista."
+                    + "\n#2 - Remover um valor inteiro da lista(apenas uma ocorrência)"
+                    + "\n#3 - Remover um valor inteiro da lista(todas as ocorrências)"
+                    + "\n#4 - Remover o primeiro valor da lista"
+                    + "\n#5 - Remover o último valor da lista"
+                    + "\n#6 - Exibir os valores da lista."
+                    + "\n#7 - Exibir status da lista."
+                    + "\n#8 - Tamanho da lista."
+                    + "\n#9 - Sair.");
             flag = scanner.nextInt();
 
             switch (flag) {
                 case 1:
 
-                    System.out.println("Digite o valor a enfileirar: ");
+                    System.out.println("Digite o valor de deseja adicionar na lista: ");
                     value = scanner.nextInt();
                     linkedList.enlist(value);
                     break;
 
                 case 2:
 
+                    System.out.println("Digite o valor de deseja remover da lista:");
+                    value = scanner.nextInt();
+
+                    try {
+
+                        linkedList.removeValue(value);
+
+                    } catch (Exception e) {
+
+                        System.out.println(e.getMessage());
+
+                    }
+
+                    break;
+                    
+                case 3:
+                    
                     System.out.println("Digite o valor de deseja remover da lista:");
                     value = scanner.nextInt();
 
@@ -58,8 +78,21 @@ public class LinkedListMain {
                     }
 
                     break;
+
+                case 4:
                     
-                case 3:
+                    linkedList.removeFirst();
+
+                    break;
+
+                case 5:
+
+                    linkedList.removeLast();
+                    
+                    break;
+
+                case 6:
+                    
                     try {
 
                         System.out.println("\nValores contidos na lista: ");
@@ -70,8 +103,9 @@ public class LinkedListMain {
                         System.out.println(e.getMessage());
                     }
                     break;
+
+                case 7:
                     
-                case 4:
                     if (linkedList.isEmpty()) {
 
                         System.out.println("Lista vazia");
@@ -82,8 +116,9 @@ public class LinkedListMain {
 
                     }
                     break;
+
+                case 8:
                     
-                case 5:
                     try {
 
                         System.out.println("\nTamanho da lista = "
@@ -95,14 +130,14 @@ public class LinkedListMain {
 
                     }
                     break;
-                    
-                case 6:
-                    System.out.println("### CHEERS!! ###");
+
+                case 9:
+
                     break;
-                    
+
             }
 
-        } while (flag != 6);
+        } while (flag != 9);
 
     }
 

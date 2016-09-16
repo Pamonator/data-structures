@@ -42,6 +42,57 @@ public class LinkedList {
 
     }
 
+    public void orderedEnlist(int value) {
+
+        Node newNode;
+        newNode = new Node();
+        newNode.setValue(value);
+        newNode.setNext(null);
+
+        if (this.isEmpty()) {
+
+            this.first = newNode;
+
+        } else {
+
+            Node auxNode = this.first;
+
+            if (value <= this.first.getValue()) {
+
+                newNode.setNext(this.first);
+
+                this.first = newNode;
+
+            } else {
+
+                while (auxNode.getNext() != null) {
+
+                    if (value > auxNode.getValue()
+                            && value <= auxNode.getNext().getValue()) {
+
+                        newNode.setNext(auxNode.getNext());
+                        auxNode.setNext(newNode);
+
+                    } else {
+
+                        auxNode = auxNode.getNext();
+
+                        if (auxNode.getNext() == null) {
+
+                            auxNode.setNext(newNode);
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
     public void delist(int value) throws EmptyListException {
 
         if (!this.isEmpty()) {
@@ -181,21 +232,15 @@ public class LinkedList {
 
                 Node auxNode = this.first;
 
-                while (auxNode.getNext() != null) {
-
-                    if (auxNode.getNext().getNext() == null) {
-
-                        auxNode.setNext(null);
-
-                        wasRemoved = true;
-
-                    } else {
-
-                        auxNode = auxNode.getNext();
-
-                    }
-
+                while (auxNode.getNext().getNext() != null) {
+                    
+                    auxNode = auxNode.getNext();
+                    
                 }
+
+                auxNode.setNext(null);
+
+                wasRemoved = true;
 
             }
 
@@ -261,7 +306,38 @@ public class LinkedList {
 
     }
 
-    public boolean doesValueExist(int value) {        
+    public void showValuesBackwards() throws EmptyListException {
+
+        if (!this.isEmpty()) {
+
+            Node auxNode = this.first;
+
+            if (auxNode.getNext() != null) {
+
+                showValuesBackwards();
+
+            } else {
+
+                System.out.println(auxNode.getValue());
+
+                while (auxNode.getNext() != null) {
+
+                    System.out.println(auxNode.getNext().getValue());
+                    auxNode = auxNode.getNext();
+
+                }
+
+            }
+
+        } else {
+
+            throw new EmptyListException("A lista está vazia!");
+
+        }
+
+    }
+
+    public boolean doesValueExist(int value) {
 
         if (!this.isEmpty()) {
 

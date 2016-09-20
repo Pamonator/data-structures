@@ -309,13 +309,7 @@ public class LinkedList {
             
         }
 
-    }   
-    
-    public void showValuesBackwards() throws EmptyListException {
-
-        
-
-    }    
+    }           
 
     private boolean doesValueExist(int value) {
 

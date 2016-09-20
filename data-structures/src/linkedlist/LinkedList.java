@@ -296,11 +296,11 @@ public class LinkedList {
 
     }
 
-    public void showValuesBackwards(Node node) throws EmptyListException {
+    public void showValuesBackward(Node node) throws EmptyListException {
 
         if (node.getNext() != null) {
            
-            showValuesBackwards(node.getNext());
+            showValuesBackward(node.getNext());
             System.out.println(node.getValue());
 
         } else {
@@ -309,7 +309,8 @@ public class LinkedList {
             
         }
 
-    }    
+    }   
+    
     public void showValuesBackwards() throws EmptyListException {
 
         

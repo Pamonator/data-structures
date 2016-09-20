@@ -110,6 +110,7 @@ public class LinkedListMain {
                     } catch (Exception e) {
 
                         System.out.println(e.getMessage());
+                        
                     }
                     break;
 
@@ -118,7 +119,7 @@ public class LinkedListMain {
                     try {
 
                         System.out.println("\nValores contidos na lista: ");
-                        linkedList.showValuesBackwards();
+                        linkedList.showValuesBackwards(linkedList.getFirst());
 
                     } catch (Exception e) {
 

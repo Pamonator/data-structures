@@ -15,54 +15,72 @@ import node.Node;
 public class CircularList {
 
     private Node first = null;
-    private Node last = null;
 
     public void enlist(int value) {
 
-        Node newNode;
+        Node newNode = new Node();
+        newNode.setValue(value);
+        newNode.setNext(this.first);
 
         if (this.isEmpty()) {
 
-            newNode = new Node();
-            newNode.setValue(value);
-            newNode.setNext(null);
             this.first = newNode;
-            this.last = newNode;
-            this.last.setNext(this.first);
 
         } else {
 
-            newNode = new Node();
-            newNode.setValue(value);
-            newNode.setNext(null);
-            this.last.setNext(newNode);
-            this.last = newNode;
+            Node auxNode = this.first;
+
+            while (auxNode.getNext() != this.first) {
+
+                auxNode = auxNode.getNext();
+
+            }
+
+            auxNode.setNext(newNode);
 
         }
 
     }
 
-    public void delist(int value) {
+    public boolean delist(int value) throws EmptyListException {
 
-        Node nodeAux = this.first;
+        boolean wasRemoved = false;
 
-        if (nodeAux.getValue() == value) {
+        if (!this.isEmpty()) {
 
-            this.first = this.first.getNext();
+            if (this.first.getValue() == value) {
 
-        }
+                this.first = this.first.getNext();
 
-        while (nodeAux.getNext() != null) {
+                wasRemoved = true;
 
-            if (nodeAux.getNext().getValue() == value) {
+            } else {
 
-                nodeAux = nodeAux.getNext();
+                Node auxNode = this.first;
+
+                while (auxNode.getNext() != this.first) {
+
+                    if (auxNode.getNext().getValue() == value) {
+
+                        auxNode.setNext(auxNode.getNext().getNext());
+
+                        wasRemoved = true;
+
+                    }
+
+                    auxNode = auxNode.getNext();
+
+                }
 
             }
 
-            nodeAux = nodeAux.getNext();
+        } else {
+
+            throw new EmptyListException("A Lista esta vazia!");
 
         }
+
+        return wasRemoved;
 
     }
 
@@ -112,35 +130,43 @@ public class CircularList {
 
         } else {
 
-            throw new EmptyListException("A fila está vazia!");
+            throw new EmptyListException("A lista está vazia!");
 
         }
 
     }
 
-    public boolean doExist(int value) {
+    private boolean doExist(int value) throws EmptyListException {
 
-        Node nodeAux = this.first;
+        if (!this.isEmpty()) {
 
-        if (nodeAux.getValue() == value) {
+            Node nodeAux = this.first;
 
-            return true;
-
-        }
-
-        while (nodeAux.getNext() != null) {
-
-            if (nodeAux.getNext().getValue() == value) {
+            if (nodeAux.getValue() == value) {
 
                 return true;
 
             }
 
-            nodeAux = nodeAux.getNext();
+            while (nodeAux.getNext() != null) {
+
+                if (nodeAux.getNext().getValue() == value) {
+
+                    return true;
+
+                }
+
+                nodeAux = nodeAux.getNext();
+
+            }
+
+            return false;
+
+        } else {
+
+            throw new EmptyListException("A lista está vazia!");
 
         }
-
-        return false;
 
     }
 

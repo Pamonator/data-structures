@@ -7,6 +7,7 @@ package main;
 
 import java.util.Scanner;
 import linkedlist.LinkedList;
+import node.Node;
 
 /**
  *
@@ -18,6 +19,7 @@ public class LinkedListMain {
 
         Scanner scanner = new Scanner(System.in);
         LinkedList linkedList = new LinkedList();
+        Node node;
         int value;
         int flag;
 
@@ -44,14 +46,20 @@ public class LinkedListMain {
 
                     System.out.println("Digite o valor de deseja adicionar na lista: ");
                     value = scanner.nextInt();
-                    linkedList.enlist(value);
+                    node = new Node();
+                    node.setValue(value);
+                    node.setNext(null);
+                    linkedList.enlist(linkedList.getFirst(), node);
                     break;
 
                 case 2:
 
                     System.out.println("Digite o valor de deseja adicionar na lista: ");
                     value = scanner.nextInt();
-                    linkedList.orderedEnlist(value);
+                    node = new Node();
+                    node.setValue(value);
+                    node.setNext(null);
+                    linkedList.orderedEnlist(linkedList.getFirst(), node);
                     break;
 
                 case 3:

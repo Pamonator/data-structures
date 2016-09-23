@@ -12,56 +12,70 @@ import exception.EmptyListException;
  *
  * @author gilca
  */
-public class LinkedList {
+public class LinkedList_old {
 
     private Node first = null;
 
-    public void enlist(Node temp, Node node) {
+    public void enlist(int value) {
+
+        Node newNode;
+        newNode = new Node();
+        newNode.setValue(value);
+        newNode.setNext(null);
 
         if (this.isEmpty()) {
 
-            this.first = node;
-
-        } else if (temp.getNext() != null) {
-
-            temp = temp.getNext();
-            enlist(temp, node);
+            this.first = newNode;
 
         } else {
 
-            temp.setNext(node);
+            Node auxNode = this.first;
 
+            while (auxNode.getNext() != null) {
+
+                auxNode = auxNode.getNext();
+
+            }
+
+            auxNode.setNext(newNode);
         }
 
     }
 
-    public void orderedEnlist(Node temp, Node node) {
+    public void orderedEnlist(int value) {
+
+        Node newNode;
+        newNode = new Node();
+        newNode.setValue(value);
+        newNode.setNext(null);
 
         if (this.isEmpty()) {
 
-            this.first = node;
+            this.first = newNode;
 
-        } else if (node.getValue() < this.first.getValue()) {
+        } else if (value < this.first.getValue()) {
 
-            node.setNext(this.first);
-            this.first = node;
+            newNode.setNext(this.first);
+            this.first = newNode;
 
         } else {
 
-            if (temp.getNext() != null && temp.getNext().getValue() <= node.getValue()) {
+            Node auxNode = this.first;
 
-                temp = temp.getNext();
-                orderedEnlist(temp, node);
-                
+            while (auxNode.getNext() != null && auxNode.getNext().getValue() <= value) {
 
-            } else if (temp.getNext() != null) {
+                auxNode = auxNode.getNext();
 
-                node.setNext(temp.getNext());
-                temp.setNext(node);
+            }
+
+            if (auxNode.getNext() != null) {
+
+                newNode.setNext(auxNode.getNext());
+                auxNode.setNext(newNode);
 
             } else {
 
-                temp.setNext(node);
+                auxNode.setNext(newNode);
 
             }
 
@@ -285,13 +299,13 @@ public class LinkedList {
     public void showValuesBackward(Node node) throws EmptyListException {
 
         if (node != null) {
-
+           
             showValuesBackward(node.getNext());
             System.out.println(node.getValue());
 
         }
 
-    }
+    }           
 
     private boolean doesValueExist(int value) {
 

@@ -127,21 +127,17 @@ public class LinkedList {
 
                 wasRemoved = true;
 
-            } else {
+            } else if (temp.getNext() != null) {
 
-                if (temp.getNext() != null) {
+                if (temp.getNext().getValue() == value) {
 
-                    if (temp.getNext().getValue() == value) {
+                    temp.setNext(temp.getNext().getNext());
 
-                        temp.setNext(temp.getNext().getNext());
+                    wasRemoved = true;
 
-                        wasRemoved = true;
+                } else {
 
-                    } else {
-
-                        removeValue(temp.getNext(), value);
-
-                    }
+                    removeValue(temp.getNext(), value);
 
                 }
 
@@ -290,6 +286,87 @@ public class LinkedList {
 
         return false;
 
+    }
+
+    /**
+     * Método que remove todos os valores não primos de uma lista de inteiros
+     */
+    public void primos() {
+
+        if (this.first.getValue() == 0) {
+
+            this.first = this.first.getNext();
+
+        }
+
+        if (this.first.getValue() == 1) {
+
+            this.first = this.first.getNext();
+
+        }
+
+        Node temp = this.first;
+
+        while (temp.getNext() != null) {
+
+            Node aux = temp;
+
+            while (aux.getNext() != null) {
+
+                if (aux.getNext().getValue() % temp.getValue() != 0) {
+
+                    aux = aux.getNext();
+
+                } else {
+
+                    aux.setNext(aux.getNext().getNext());
+
+                }
+
+            }
+
+            temp = temp.getNext();
+
+        }
+    }
+
+    public void primos(Node temp) {
+
+        if (temp == this.first && temp.getValue() == 0) {
+
+            this.first = this.first.getNext();
+            temp = this.first;
+
+        }
+
+        if (temp == this.first && temp.getValue() == 1) {
+
+            this.first = this.first.getNext();
+            temp = this.first;
+
+        }
+
+        if (temp.getNext() != null) {
+
+            Node aux = temp;
+
+            while (aux.getNext() != null) {
+
+                if (aux.getNext().getValue() % temp.getValue() != 0) {
+
+                    aux = aux.getNext();
+
+                } else {
+
+                    aux.setNext(aux.getNext().getNext());
+
+                }
+
+            }
+
+            primos(temp.getNext());
+
+        }
     }
 
 }

@@ -46,54 +46,43 @@ public class LinkedList {
             node.setNext(this.first);
             this.first = node;
 
+        } else if (temp.getNext() != null && temp.getNext().getValue() <= node.getValue()) {
+
+            temp = temp.getNext();
+            orderedEnlist(temp, node);
+
+        } else if (temp.getNext() != null) {
+
+            node.setNext(temp.getNext());
+            temp.setNext(node);
+
         } else {
 
-            if (temp.getNext() != null && temp.getNext().getValue() <= node.getValue()) {
-
-                temp = temp.getNext();
-                orderedEnlist(temp, node);
-                
-
-            } else if (temp.getNext() != null) {
-
-                node.setNext(temp.getNext());
-                temp.setNext(node);
-
-            } else {
-
-                temp.setNext(node);
-
-            }
+            temp.setNext(node);
 
         }
 
     }
 
-    public void delist(int value) throws EmptyListException {
+    public void delist(Node temp, int value) throws EmptyListException {
 
         if (!this.isEmpty()) {
 
-            while (this.doesValueExist(value)) {
+            while (this.doesValueExist(temp, value)) {
 
                 if (this.first.getValue() == value) {
 
                     this.first = this.first.getNext();
 
-                } else {
+                } else if (temp.getNext() != null) {
 
-                    Node auxNode = this.first;
+                    if (temp.getNext().getValue() == value) {
 
-                    while (auxNode.getNext() != null) {
+                        temp.setNext(temp.getNext().getNext());
 
-                        if (auxNode.getNext().getValue() == value) {
+                    } else {
 
-                            auxNode.setNext(auxNode.getNext().getNext());
-
-                        } else {
-
-                            auxNode = auxNode.getNext();
-
-                        }
+                        delist(temp.getNext(), value);
 
                     }
 
@@ -115,20 +104,18 @@ public class LinkedList {
 
     }
 
-    public Node getLast() {
+    public Node getLast(Node temp) {
 
-        Node aux = this.first;
+        if (temp.getNext() != null) {
 
-        while (aux.getNext() != null) {
-
-            aux = aux.getNext();
+            getLast(temp.getNext());
 
         }
 
-        return aux;
+        return temp;
     }
 
-    public boolean removeValue(int value) throws EmptyListException {
+    public boolean removeValue(Node temp, int value) throws EmptyListException {
 
         boolean wasRemoved = false;
 
@@ -142,19 +129,17 @@ public class LinkedList {
 
             } else {
 
-                Node auxNode = this.first;
+                if (temp.getNext() != null) {
 
-                while (auxNode.getNext() != null) {
+                    if (temp.getNext().getValue() == value) {
 
-                    if (auxNode.getNext().getValue() == value) {
-
-                        auxNode.setNext(auxNode.getNext().getNext());
+                        temp.setNext(temp.getNext().getNext());
 
                         wasRemoved = true;
 
                     } else {
 
-                        auxNode = auxNode.getNext();
+                        removeValue(temp.getNext(), value);
 
                     }
 
@@ -192,7 +177,7 @@ public class LinkedList {
 
     }
 
-    public boolean removeLast() {
+    public boolean removeLast(Node temp) {
 
         boolean wasRemoved = false;
 
@@ -204,17 +189,13 @@ public class LinkedList {
 
                 wasRemoved = true;
 
+            } else if (temp.getNext().getNext() != null) {
+
+                removeLast(temp.getNext());
+
             } else {
 
-                Node auxNode = this.first;
-
-                while (auxNode.getNext().getNext() != null) {
-
-                    auxNode = auxNode.getNext();
-
-                }
-
-                auxNode.setNext(null);
+                temp.setNext(null);
 
                 wasRemoved = true;
 
@@ -259,30 +240,18 @@ public class LinkedList {
 
     }
 
-    public void showValues() throws EmptyListException {
+    public void showValues(Node temp) {
 
-        if (!this.isEmpty()) {
+        if (temp != null) {
 
-            Node nodeAux = this.first;
-
-            System.out.println(nodeAux.getValue());
-
-            while (nodeAux.getNext() != null) {
-
-                System.out.println(nodeAux.getNext().getValue());
-                nodeAux = nodeAux.getNext();
-
-            }
-
-        } else {
-
-            throw new EmptyListException("A lista está vazia!");
+            System.out.println(temp.getValue());
+            showValues(temp.getNext());
 
         }
 
     }
 
-    public void showValuesBackward(Node node) throws EmptyListException {
+    public void showValuesBackward(Node node) {
 
         if (node != null) {
 
@@ -293,27 +262,27 @@ public class LinkedList {
 
     }
 
-    private boolean doesValueExist(int value) {
+    private boolean doesValueExist(Node temp, int value) {
 
         if (!this.isEmpty()) {
 
-            Node nodeAux = this.first;
-
-            if (nodeAux.getValue() == value) {
+            if (temp.getValue() == value) {
 
                 return true;
 
             }
 
-            while (nodeAux.getNext() != null) {
+            if (temp.getNext() != null) {
 
-                if (nodeAux.getNext().getValue() == value) {
+                if (temp.getNext().getValue() == value) {
 
                     return true;
 
-                }
+                } else {
 
-                nodeAux = nodeAux.getNext();
+                    doesValueExist(temp.getNext(), value);
+
+                }
 
             }
 

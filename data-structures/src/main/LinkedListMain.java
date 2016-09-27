@@ -69,7 +69,7 @@ public class LinkedListMain {
 
                     try {
 
-                        linkedList.removeValue(value);
+                        linkedList.removeValue(linkedList.getFirst(), value);
 
                     } catch (Exception e) {
 
@@ -86,7 +86,7 @@ public class LinkedListMain {
 
                     try {
 
-                        linkedList.delist(value);
+                        linkedList.delist(linkedList.getFirst(), value);
 
                     } catch (Exception e) {
 
@@ -104,37 +104,42 @@ public class LinkedListMain {
 
                 case 6:
 
-                    linkedList.removeLast();
+                    linkedList.removeLast(linkedList.getFirst());
 
                     break;
 
                 case 7:
 
-                    try {
+                    System.out.println("\nValores contidos na lista: ");
+                    
+                    if (linkedList.isEmpty()) {
 
-                        System.out.println("\nValores contidos na lista: ");
-                        linkedList.showValues();
+                        System.out.println("Lista vazia!!");
 
-                    } catch (Exception e) {
+                    } else {
 
-                        System.out.println(e.getMessage());
-                        
+                        linkedList.showValues(linkedList.getFirst());
+
                     }
+
                     break;
 
                 case 8:
-                    
-                    try {
 
-                        System.out.println("\nValores contidos na lista: ");
+                    System.out.println("\nValores contidos na lista: ");
+                    
+                    if (linkedList.isEmpty()) {
+
+                        System.out.println("Lista vazia!!");
+
+                    } else {
+
                         linkedList.showValuesBackward(linkedList.getFirst());
 
-                    } catch (Exception e) {
-
-                        System.out.println(e.getMessage());
                     }
-                    break;
 
+                    break;
+                    
                 case 9:
 
                     if (linkedList.isEmpty()) {

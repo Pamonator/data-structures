@@ -20,7 +20,6 @@ public class CircularList {
 
         Node newNode = new Node();
         newNode.setValue(value);
-        newNode.setNext(this.first);
 
         if (this.isEmpty()) {
 
@@ -40,6 +39,8 @@ public class CircularList {
 
         }
 
+        newNode.setNext(this.first);
+
     }
 
     public boolean delist(int value) throws EmptyListException {
@@ -50,7 +51,7 @@ public class CircularList {
 
             if (this.first.getValue() == value) {
 
-                this.first = this.first.getNext();
+                this.removeFirst();
 
                 wasRemoved = true;
 
@@ -100,7 +101,7 @@ public class CircularList {
 
             Node nodeAux = this.first;
 
-            while (nodeAux.getNext() != null) {
+            while (nodeAux.getNext() != this.first) {
 
                 size++;
                 nodeAux = nodeAux.getNext();
@@ -121,7 +122,7 @@ public class CircularList {
 
             System.out.println(nodeAux.getValue());
 
-            while (nodeAux.getNext() != null) {
+            while (nodeAux.getNext() != this.first) {
 
                 System.out.println(nodeAux.getNext().getValue());
                 nodeAux = nodeAux.getNext();
@@ -148,7 +149,7 @@ public class CircularList {
 
             }
 
-            while (nodeAux.getNext() != null) {
+            while (nodeAux.getNext() != this.first) {
 
                 if (nodeAux.getNext().getValue() == value) {
 
@@ -170,4 +171,55 @@ public class CircularList {
 
     }
 
+    public void removeFirst() throws EmptyListException {
+
+        if (!isEmpty()) {
+
+            Node aux = this.first;
+
+            while (aux.getNext() != this.first) {
+
+                aux = aux.getNext();
+
+            }
+
+            this.first = this.first.getNext();
+
+            aux.setNext(this.first);
+
+        } else {
+
+            throw new EmptyListException("Lista vazia!");
+
+        }
+
+    }
+
+    public void removeLast() throws EmptyListException {
+
+        if (!isEmpty()) {
+
+            Node aux = this.first;
+
+            while (aux.getNext().getNext() != this.first) {
+
+                aux = aux.getNext();
+
+            }
+
+            aux.setNext(this.first);
+
+        } else {
+
+            throw new EmptyListException("Lista vazia!");
+
+        }
+
+    }
+
+    public Node getFirst() {
+
+        return this.first;
+
+    }
 }

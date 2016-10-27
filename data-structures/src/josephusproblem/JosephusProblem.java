@@ -36,20 +36,22 @@ public class JosephusProblem {
 
         while (aux != aux.getNext()) {
 
-            for (int i = 0; i < s; i++) {
+            for (int i = 0; i < s - 1; i++) {
 
                 aux = aux.getNext();
 
             }
 
-            circularList.delist(aux.getValue());
+            //circularList.delist(aux.getValue());
+            
+            aux.setNext(aux.getNext().getNext());
             
             aux = aux.getNext();
 
         }
 
-        System.out.println("Sobrevivente: ");
-        circularList.showValues();
+        System.out.println("Sobrevivente: " + aux.getValue());
+        
 
     }
 

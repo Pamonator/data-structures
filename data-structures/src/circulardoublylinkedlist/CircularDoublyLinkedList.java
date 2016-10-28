@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package doublylinkedlist;
+package circulardoublylinkedlist;
 
 import exception.EmptyListException;
 
@@ -11,7 +11,7 @@ import exception.EmptyListException;
  *
  * @author gilca
  */
-public class DoublyLinkedList {
+public class CircularDoublyLinkedList {
 
     private Node first = null;
 
@@ -19,25 +19,26 @@ public class DoublyLinkedList {
 
         Node newNode;
         newNode = new Node();
-        newNode.setValue(value);
-        newNode.setNext(null);
+        newNode.setValue(value);        
         newNode.setPrevious(null);
 
         if (this.isEmpty()) {
 
             this.first = newNode;
+            newNode.setNext(this.first);
 
         } else {
 
             Node auxNode = this.first;
 
-            while (auxNode.getNext() != null) {
+            while (auxNode.getNext() != this.first) {
 
                 auxNode = auxNode.getNext();
 
             }
 
             newNode.setPrevious(auxNode);
+            newNode.setNext(this.first);
             auxNode.setNext(newNode);
 
         }
@@ -55,24 +56,26 @@ public class DoublyLinkedList {
         if (this.isEmpty()) {
 
             this.first = newNode;
+            newNode.setNext(this.first);
 
         } else if (value < this.first.getValue()) {
 
-            newNode.setNext(this.first);
-            //newNode.setPrevious(null);
+            this.getLast().setNext(newNode);
+            newNode.setNext(this.first);            
             this.first = newNode;
+            
 
         } else {
 
             Node auxNode = this.first;
 
-            while (auxNode.getNext() != null && auxNode.getNext().getValue() <= value) {
+            while (auxNode.getNext() != this.first && auxNode.getNext().getValue() <= value) {
 
                 auxNode = auxNode.getNext();
 
             }
 
-            if (auxNode.getNext() != null) {
+            if (auxNode.getNext() != this.first) {
 
                 newNode.setNext(auxNode.getNext());
                 newNode.setPrevious(auxNode);
@@ -82,6 +85,7 @@ public class DoublyLinkedList {
 
                 auxNode.setNext(newNode);
                 newNode.setPrevious(auxNode);
+                newNode.setNext(this.first);
 
             }
 
@@ -103,7 +107,7 @@ public class DoublyLinkedList {
 
                     Node auxNode = this.first;
 
-                    while (auxNode.getNext() != null) {
+                    while (auxNode.getNext() != this.first) {
 
                         if (auxNode.getNext().getValue() == value) {
 
@@ -140,7 +144,7 @@ public class DoublyLinkedList {
 
         Node aux = this.first;
 
-        while (aux.getNext() != null) {
+        while (aux.getNext() != this.first) {
 
             aux = aux.getNext();
 
@@ -157,7 +161,7 @@ public class DoublyLinkedList {
 
             if (this.first.getValue() == value) {
 
-                this.first = this.first.getNext();
+                this.removeFirst();
 
                 wasRemoved = true;
 
@@ -165,7 +169,7 @@ public class DoublyLinkedList {
 
                 Node auxNode = this.first;
 
-                while (auxNode.getNext() != null) {
+                while (auxNode.getNext() != this.first) {
 
                     if (auxNode.getNext().getValue() == value) {
 
@@ -194,25 +198,29 @@ public class DoublyLinkedList {
 
     }
 
-    public boolean removeFirst() throws EmptyListException {
+    public void removeFirst() throws EmptyListException {
 
-        boolean wasRemoved = false;
+        if (!isEmpty()) {
 
-        if (!this.isEmpty()) {
+            Node aux = this.first;
+
+            while (aux.getNext() != this.first) {
+
+                aux = aux.getNext();
+
+            }
 
             this.first = this.first.getNext();
 
-            wasRemoved = true;
+            aux.setNext(this.first);
 
         } else {
 
-            throw new EmptyListException("A Lista esta vazia!");
+            throw new EmptyListException("Lista vazia!");
 
         }
 
-        return wasRemoved;
-
-    }
+    }    
 
     public boolean removeLast() {
 
@@ -220,7 +228,7 @@ public class DoublyLinkedList {
 
         if (!this.isEmpty()) {
 
-            if (this.first.getNext() == null) {
+            if (this.first.getNext() == this.first) {
 
                 this.first = null;
 
@@ -230,13 +238,13 @@ public class DoublyLinkedList {
 
                 Node auxNode = this.first;
 
-                while (auxNode.getNext().getNext() != null) {
+                while (auxNode.getNext() != this.first) {
 
                     auxNode = auxNode.getNext();
 
                 }
 
-                auxNode.setNext(null);
+                auxNode.setNext(this.first);
 
                 wasRemoved = true;
 
@@ -268,7 +276,7 @@ public class DoublyLinkedList {
 
             Node nodeAux = this.first;
 
-            while (nodeAux.getNext() != null) {
+            while (nodeAux.getNext() != this.first) {
 
                 size++;
                 nodeAux = nodeAux.getNext();
@@ -289,7 +297,7 @@ public class DoublyLinkedList {
 
             System.out.println(nodeAux.getValue());
 
-            while (nodeAux.getNext() != null) {
+            while (nodeAux.getNext() != this.first) {
 
                 System.out.println(nodeAux.getNext().getValue());
                 nodeAux = nodeAux.getNext();
@@ -306,7 +314,7 @@ public class DoublyLinkedList {
 
     public void showValuesBackward(Node node) throws EmptyListException {
 
-        if (node.getNext() != null) {
+        if (node.getNext() != this.first) {
 
             showValuesBackward(node.getNext());
             System.out.println(node.getValue());
@@ -331,7 +339,7 @@ public class DoublyLinkedList {
 
             }
 
-            while (nodeAux.getNext() != null) {
+            while (nodeAux.getNext() != this.first) {
 
                 if (nodeAux.getNext().getValue() == value) {
 

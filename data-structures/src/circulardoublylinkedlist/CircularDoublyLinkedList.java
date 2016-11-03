@@ -19,7 +19,7 @@ public class CircularDoublyLinkedList {
 
         Node newNode;
         newNode = new Node();
-        newNode.setValue(value);        
+        newNode.setValue(value);
         newNode.setPrevious(null);
 
         if (this.isEmpty()) {
@@ -40,6 +40,7 @@ public class CircularDoublyLinkedList {
             newNode.setPrevious(auxNode);
             newNode.setNext(this.first);
             auxNode.setNext(newNode);
+            this.first.setPrevious(newNode);
 
         }
 
@@ -61,9 +62,8 @@ public class CircularDoublyLinkedList {
         } else if (value < this.first.getValue()) {
 
             this.getLast().setNext(newNode);
-            newNode.setNext(this.first);            
+            newNode.setNext(this.first);
             this.first = newNode;
-            
 
         } else {
 
@@ -88,6 +88,8 @@ public class CircularDoublyLinkedList {
                 newNode.setNext(this.first);
 
             }
+            
+            this.first.setPrevious(newNode);
 
         }
 
@@ -220,7 +222,7 @@ public class CircularDoublyLinkedList {
 
         }
 
-    }    
+    }
 
     public boolean removeLast() {
 
@@ -354,6 +356,44 @@ public class CircularDoublyLinkedList {
         }
 
         return false;
+
+    }
+
+    public int josephusThisShit(int N, int S, int J) {
+
+        for (int i = 0; i < N; i++) {
+
+            this.enlist(i + 1);
+
+        }
+
+        Node temp = this.first;
+
+        while (temp != temp.getNext() && temp != temp.getPrevious()) {
+
+            for (int i = 0; i < S - 1; i++) {
+
+                temp = temp.getNext();
+
+            }
+
+            temp.setNext(temp.getNext().getNext());
+
+            temp = temp.getNext();
+            
+            for (int i = 0; i < J - 1; i++) {
+                
+                temp = temp.getPrevious();
+                
+            }
+            
+            temp.setPrevious(temp.getPrevious().getPrevious());
+            
+            temp = temp.getPrevious();
+
+        }
+        
+        return temp.getValue();
 
     }
 

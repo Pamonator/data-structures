@@ -85,4 +85,9 @@ public class BinaryTree {
 
     }
 
+    public void showLeaves(TreeNode temp) {
+        
+        
+        
+    }
 }

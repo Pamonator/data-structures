@@ -22,15 +22,15 @@ public class BinaryTreeMain {
         int value;
 
         System.out.println("### Welcome to the Binary Tree Tabajara Tester ###");
-        
+
         do {
-            
+
             System.out.println("\n# Escolha sua opçao:"
                     + "\n#1  - Adicionar um valor inteiro."
                     + "\n#2  - Exibir os valores da lista."
                     + "\n#0  - Sair.");
             flag = scanner.nextInt();
-            
+
             switch (flag) {
                 case 1:
                     System.out.println("Digite o valor de deseja adicionar na árvore: ");
@@ -40,10 +40,8 @@ public class BinaryTreeMain {
                 case 2:
                     binaryTree.showTree(binaryTree.getRoot());
                     break;
-                default:
-                    throw new AssertionError();
+
             }
-            
 
         } while (flag != 0);
 

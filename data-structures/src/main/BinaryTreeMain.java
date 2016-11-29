@@ -32,6 +32,6 @@ public class BinaryTreeMain {
         binaryTree.showLeaves(binaryTree.getRoot());
         
         
-        System.out.println("numero de folhas: " + binaryTree.leafCount(binaryTree.getRoot()));
+        System.out.println("\nNúmero de folhas: " + binaryTree.leafCount(binaryTree.getRoot()));
     }
 }

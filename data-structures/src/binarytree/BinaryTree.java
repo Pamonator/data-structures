@@ -86,28 +86,44 @@ public class BinaryTree {
     }
 
     public void showLeaves(TreeNode temp) {
+        
+        if (temp != null) {
 
-        if (temp.getLeft() != null && temp.getRight() != null) {
+            if (temp.getLeft() != null) {
 
-            showLeaves(temp.getLeft());
-            showLeaves(temp.getRight());
+                showLeaves(temp.getLeft());
 
-        } else {
+            }
 
-            System.out.println(temp.getValue());
+            if (temp.getRight() != null) {
 
+                showLeaves(temp.getRight());
+
+            }
+
+            if (temp.getLeft() == null && temp.getRight() == null) {
+
+                System.out.println(temp.getValue());
+
+            }
+            
         }
+
     }
 
     public int leafCount(TreeNode temp) {
 
-        if (temp.getLeft() == null && temp.getRight() == null) {
+        if (temp == null) {
 
-            return 1;
+            return 0;
+
+        } else if (temp.getLeft() != null && temp.getRight() != null) {
+
+            return leafCount(temp.getLeft()) + leafCount(temp.getRight());
 
         } else {
 
-            return leafCount(temp.getLeft()) + leafCount(temp.getRight());
+            return 1;
 
         }
 

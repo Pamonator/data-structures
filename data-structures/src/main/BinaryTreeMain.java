@@ -18,7 +18,7 @@ public class BinaryTreeMain {
 
         BinaryTree binaryTree = new BinaryTree();
         Scanner scanner = new Scanner(System.in);
-        int values[] = {28, 6, 12, 19, 36, 5, 13, 30, 57};
+        int values[] = {28, 6, 12, 19, 9};
         int value;
 
         for (int i = 0; i < values.length; i++) {
@@ -26,7 +26,9 @@ public class BinaryTreeMain {
             binaryTree.insert(values[i]);
             
         }
-        
+                
+        binaryTree.showTree(binaryTree.getRoot());
+        System.out.println("\nFolhas: ");
         binaryTree.showLeaves(binaryTree.getRoot());
         
         

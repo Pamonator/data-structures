@@ -32,6 +32,13 @@ public class BinaryTreeMain {
         binaryTree.showLeaves(binaryTree.getRoot());
         
         
+        System.out.println("\nNúmero de nós: " + binaryTree.nodeCount(binaryTree.getRoot()));
+        
         System.out.println("\nNúmero de folhas: " + binaryTree.leafCount(binaryTree.getRoot()));
+
+        System.out.println("\nSoma dos valores contidos na árvore = " + binaryTree.sumValues(binaryTree.getRoot()));
+        
+        System.out.println("\nProfundidade da árvore: " + binaryTree.deepness(binaryTree.getRoot()));
+
     }
 }

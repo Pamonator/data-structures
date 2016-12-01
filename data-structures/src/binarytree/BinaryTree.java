@@ -5,6 +5,11 @@
  */
 package binarytree;
 
+import exception.EmptyTreeException;
+import exception.ValueNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author a1402072
@@ -86,82 +91,204 @@ public class BinaryTree {
     }
 
     public void showLeaves(TreeNode temp) {
-        
+
         if (temp != null) {
 
-            if (temp.getLeft() != null) {
+            showLeaves(temp.getLeft());
 
-                showLeaves(temp.getLeft());
-
-            }
-
-            if (temp.getRight() != null) {
-
-                showLeaves(temp.getRight());
-
-            }
+            showLeaves(temp.getRight());
 
             if (temp.getLeft() == null && temp.getRight() == null) {
 
                 System.out.println(temp.getValue());
 
             }
-            
+
         }
 
     }
 
     public int leafCount(TreeNode temp) {
 
-        if (temp == null) {
+        if (temp != null) {
 
-            return 0;
+            if (temp.getLeft() == null && temp.getRight() == null) {
 
-        } else if (temp.getLeft() != null && temp.getRight() != null) {
+                return 1;
+
+            }
 
             return leafCount(temp.getLeft()) + leafCount(temp.getRight());
 
-        } else {
-
-            return 1;
-
         }
 
+        return 0;
     }
 
     public int nodeCount(TreeNode temp) {
 
-        if (temp.getLeft() == null && temp.getRight() == null) {
+        if (temp != null) {
 
-            return 0;
+            if (temp.getLeft() == null && temp.getRight() == null) {
+
+                return 1;
+
+            }
+
+            return 1 + nodeCount(temp.getLeft()) + nodeCount(temp.getRight());
 
         }
 
-        return 1 + nodeCount(temp.getLeft()) + nodeCount(temp.getRight());
+        return 0;
 
     }
 
     public int sumValues(TreeNode temp) {
 
-        if (temp.getLeft() == null && temp.getRight() == null) {
+        if (temp != null) {
 
-            return 0;
+            if (temp.getLeft() == null && temp.getRight() == null) {
+
+                return temp.getValue();
+
+            }
+
+            return temp.getValue() + sumValues(temp.getLeft()) + sumValues(temp.getRight());
 
         }
 
-        return temp.getValue() + sumValues(temp.getLeft()) + sumValues(temp.getRight());
+        return 0;
 
     }
 
     public int deepness(TreeNode temp) {
 
-        if (temp.getLeft() == null && temp.getRight() == null) {
+        if (temp != null) {
 
-            return 0;
+            if (temp.getLeft() == null && temp.getRight() == null) {
+
+                return 0;
+
+            }
+
+            return 1 + deepness(temp.getLeft()) + deepness(temp.getRight());
 
         }
 
-        return 1 + deepness(temp.getLeft()) + deepness(temp.getRight());
+        return 0;
+
+    }
+
+    private int soonCount(TreeNode temp) {
+
+        int count = 0;
+
+        if (temp != null) {
+
+            if (temp.getLeft() != null) {
+
+                count++;
+
+            }
+
+            if (temp.getRight() != null) {
+
+                count++;
+
+            }
+
+        }
+
+        return count;
+
+    }
+
+    public void removeValue(int value, TreeNode temp) throws EmptyTreeException {
+
+        if (temp != null) {
+
+            try {
+
+                temp = searchValue(value, temp);
+
+                switch (soonCount(temp)) {
+
+                    case 0:
+                        temp = null;
+                        break;
+                    case 1:
+                        removeOneSoon(temp);
+                        break;
+                    case 2:
+                        removeTwoSoons(temp);
+                        break;
+
+                }
+
+            } catch (ValueNotFoundException ex) {
+
+                System.out.println(ex.getMessage());
+
+            }
+
+        } else {
+
+            throw new EmptyTreeException("Árvore vazia.. >.<");
+
+        }
+
+    }
+
+    private void removeLeaf(TreeNode temp) {
+        
+        temp = null;
+        
+    }
+
+    private void removeOneSoon(TreeNode temp) {
+        
+        TreeNode aux = this.root;
+        
+        boolean wasRemoved = false;
+        
+        while (!wasRemoved) {
+            
+            if (temp == aux) {
+                
+                
+                
+            }
+            
+        }
+        
+        
+        
+    }
+
+    private void removeTwoSoons(TreeNode temp) {
+    }
+
+    public TreeNode searchValue(int value, TreeNode temp) throws ValueNotFoundException {
+
+        while (temp != null) {
+
+            if (value == temp.getValue()) {
+
+                return temp;
+
+            } else if (value < temp.getValue()) {
+
+                temp = temp.getLeft();
+
+            } else {
+
+                temp = temp.getRight();
+
+            }
+
+        }
+
+        throw new ValueNotFoundException("Valor não encontrado!!");
 
     }
 

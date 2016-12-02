@@ -123,6 +123,7 @@ public class BinaryTree {
         }
 
         return 0;
+
     }
 
     public int nodeCount(TreeNode temp) {
@@ -167,12 +168,26 @@ public class BinaryTree {
 
             if (temp.getLeft() == null && temp.getRight() == null) {
 
-                return 0;
+                return 1;
 
             }
 
-            return 1 + deepness(temp.getLeft()) + deepness(temp.getRight());
+            int x = deepness(temp.getLeft());
+            int y = deepness(temp.getRight());
 
+            if (x > y) {
+
+                //System.out.println("valor: " + temp.getValue());
+                //System.out.println("retornando: " + (1 + x));
+                return 1 + x;
+
+            } else {
+
+                //System.out.println("valor: " + temp.getValue());
+                //System.out.println("retornando: " + (1 + y));
+                return 1 + y;
+
+            }
         }
 
         return 0;
@@ -214,13 +229,13 @@ public class BinaryTree {
                 switch (soonCount(temp)) {
 
                     case 0:
-                        temp = null;
+                        removeLeaf(value, this.root);
                         break;
                     case 1:
-                        removeOneSoon(temp);
+                        removeOneSoon(value, this.root);
                         break;
                     case 2:
-                        removeTwoSoons(temp);
+                        removeTwoSoons(value, this.root);
                         break;
 
                 }
@@ -231,41 +246,101 @@ public class BinaryTree {
 
             }
 
-        } else {
-
-            throw new EmptyTreeException("Árvore vazia.. >.<");
-
         }
 
     }
 
-    private void removeLeaf(TreeNode temp) {
-        
-        temp = null;
-        
-    }
+    private void removeLeaf(int value, TreeNode temp) {
 
-    private void removeOneSoon(TreeNode temp) {
-        
-        TreeNode aux = this.root;
-        
-        boolean wasRemoved = false;
-        
-        while (!wasRemoved) {
-            
-            if (temp == aux) {
-                
-                
-                
+        if (temp != null) {
+
+            if (temp.getLeft() != null
+                    && temp.getLeft().getValue() == value) {
+
+                temp.setLeft(null);
+
+            } else if (temp.getRight() != null
+                    && temp.getRight().getValue() == value) {
+
+                temp.setRight(null);
+
+            } else {
+
+                removeLeaf(value, temp.getLeft());
+                removeLeaf(value, temp.getRight());
+
             }
-            
+
         }
-        
-        
-        
+
     }
 
-    private void removeTwoSoons(TreeNode temp) {
+    private void removeOneSoon(int value, TreeNode temp) {
+
+        if (temp != null) {
+
+            if (temp.getLeft() != null
+                    && temp.getLeft().getValue() == value) {
+
+                if (temp.getLeft().getLeft() != null) {
+
+                    temp.setLeft(temp.getLeft().getLeft());
+
+                } else {
+
+                    temp.setLeft(temp.getLeft().getRight());
+
+                }
+
+            } else if (temp.getRight() != null
+                    && temp.getRight().getValue() == value) {
+
+                if (temp.getRight().getLeft() != null) {
+
+                    temp.setRight(temp.getRight().getLeft());
+
+                } else {
+
+                    temp.setRight(temp.getRight().getRight());
+
+                }
+
+            } else {
+
+                removeOneSoon(value, temp.getLeft());
+                removeOneSoon(value, temp.getRight());
+
+            }
+
+        }
+
+    }
+
+    private void removeTwoSoons(int value, TreeNode temp) {
+
+        if (temp != null) {
+
+            if (temp.getLeft() != null
+                    && temp.getLeft().getValue() == value) {
+
+                temp.setLeft(temp.getLeft().getLeft());
+                removeValue(temp.getLeft().getValue(), temp.getLeft());
+
+            } else if (temp.getRight() != null
+                    && temp.getRight().getValue() == value) {
+
+                temp.setRight(temp.getRight().getRight());
+                removeValue(temp.getRight().getValue(), temp.getRight());
+
+            } else {
+
+                removeTwoSoons(value, temp.getLeft());
+                removeTwoSoons(value, temp.getRight());
+
+            }
+
+        }
+
     }
 
     public TreeNode searchValue(int value, TreeNode temp) throws ValueNotFoundException {

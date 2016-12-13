@@ -7,8 +7,6 @@ package binarytree;
 
 import exception.EmptyTreeException;
 import exception.ValueNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -318,28 +316,31 @@ public class BinaryTree {
 
     private void removeTwoSoons(int value, TreeNode temp) {
 
-        if (temp != null) {
-
-            if (temp.getLeft() != null
-                    && temp.getLeft().getValue() == value) {
-
-                temp.setLeft(temp.getLeft().getLeft());
-                removeValue(temp.getLeft().getValue(), temp.getLeft());
-
-            } else if (temp.getRight() != null
-                    && temp.getRight().getValue() == value) {
-
-                temp.setRight(temp.getRight().getRight());
-                removeValue(temp.getRight().getValue(), temp.getRight());
-
-            } else {
-
+        if (temp.getValue() == value) {
+            
+            TreeNode aux = leftmostNode(temp.getRight());
+            
+            int newValue = aux.getValue();
+            
+            removeValue(aux.getValue(), temp);
+            
+            temp.setValue(newValue);
+            
+        } else {
+            
+            if (value < temp.getValue()) {
+                
                 removeTwoSoons(value, temp.getLeft());
+                
+            } else {
+                
                 removeTwoSoons(value, temp.getRight());
-
+                
             }
-
+            
         }
+
+        
 
     }
 
@@ -365,6 +366,23 @@ public class BinaryTree {
 
         throw new ValueNotFoundException("Valor não encontrado!!");
 
+    }
+    
+    private static TreeNode leftmostNode(TreeNode temp) {
+        
+        TreeNode aux;
+        
+        if (temp.getLeft() != null) {
+            
+            aux = leftmostNode(temp.getRight());
+            
+        } else {
+            
+            aux = temp;
+            
+        }
+        
+        return aux;
     }
 
 }
